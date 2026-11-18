@@ -1,0 +1,17 @@
+apiVersion: 1
+
+contactPoints:
+  - orgId: 1
+    name: Data Quality Alerts
+    receivers:
+      - uid: teams-data-quality
+        type: teams
+        settings:
+          url: ${TEAMS_DATA_QUALITY_URL}
+  - orgId: 1
+    name: ML Alerts
+    receivers:
+      - uid: teams-ml-alerts
+        type: teams
+        settings:
+          url: ${TEAMS_ML_URL}

@@ -1,0 +1,31 @@
+{
+  "source": "hour.csv between the 60% baseline and the 20% test set",
+  "start_row": 0,
+  "next_start_row": 60,
+  "instants": [
+    10428,
+    10487
+  ],
+  "rows": 60,
+  "training_triggered": true,
+  "files": {
+    "train_0000.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 20,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "train_0001.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 20,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "train_0002.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 20,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    }
+  }
+}

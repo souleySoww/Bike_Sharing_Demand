@@ -1,0 +1,120 @@
+apiVersion: 1
+
+# Data quality alert rules for the "Data Quality" dashboard. The label
+# team=data-quality routes them to the "Data Quality Alerts" Teams channel
+# (see notification-policies.yml).
+groups:
+  - orgId: 1
+    name: data-quality
+    folder: data-quality
+    interval: 1m
+    rules:
+      - uid: dq-file-fully-invalid
+        title: Ingested file with 100% invalid rows
+        condition: C
+        data:
+          # One row per broken file of the last 10 minutes, so each file
+          # fires on its own. The id keeps labels unique when a file name
+          # is ingested twice.
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: dsp-postgres
+            model:
+              refId: A
+              editorMode: code
+              format: table
+              rawQuery: true
+              rawSql: |-
+                SELECT file_name || ' #' || id AS file,
+                       invalid_percent
+                FROM ingestion_stats
+                WHERE created_at > now() - interval '10 minutes'
+                  AND total_rows > 0
+                  AND invalid_rows = total_rows
+          - refId: C
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: A
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [99.99]
+        noDataState: OK
+        execErrState: Error
+        for: 1m
+        isPaused: false
+        labels:
+          team: data-quality
+          severity: critical
+        annotations:
+          __dashboardUid__: data-quality
+          __panelId__: "1"
+          summary: "{{ $labels.file }}: every row is invalid"
+          description: >-
+            No row of this file could be used, so nothing from it reaches
+            predictions or training. Open its validation report from the
+            Data Docs site (http://localhost:8081), fix the source, then
+            send the file again. Dashboard:
+            http://localhost:3000/d/data-quality
+
+      - uid: dq-schema-or-majority-invalid
+        title: Schema error or more than 50% invalid rows
+        condition: C
+        data:
+          # Same shape as above: one row per affected file.
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: dsp-postgres
+            model:
+              refId: A
+              editorMode: code
+              format: table
+              rawQuery: true
+              rawSql: |-
+                SELECT file_name || ' #' || id AS file,
+                       invalid_percent
+                FROM ingestion_stats
+                WHERE created_at > now() - interval '10 minutes'
+                  AND (
+                    jsonb_array_length(missing_columns::jsonb) > 0
+                    OR invalid_percent > 50
+                  )
+          - refId: C
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: A
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0]
+        noDataState: OK
+        execErrState: Error
+        for: 1m
+        isPaused: false
+        labels:
+          team: data-quality
+          severity: warning
+        annotations:
+          __dashboardUid__: data-quality
+          __panelId__: "3"
+          summary: "{{ $labels.file }}: {{ printf \"%.0f\" $values.A.Value }}% invalid rows or a missing column"
+          description: >-
+            High criticality ingestion: a required column is missing or
+            more than half of the rows failed validation. Check the error
+            categories on the Data Quality dashboard
+            (http://localhost:3000/d/data-quality) and the file's report in
+            the Data Docs site (http://localhost:8081).

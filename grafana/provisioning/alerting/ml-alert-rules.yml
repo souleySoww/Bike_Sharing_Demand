@@ -1,0 +1,121 @@
+apiVersion: 1
+
+# ML alert rules for the "Drift and Predictions" dashboard. The label
+# team=ml routes them to the "ML Alerts" Teams channel
+# (see notification-policies.yml).
+groups:
+  - orgId: 1
+    name: ml-monitoring
+    folder: ml-monitoring
+    interval: 1m
+    rules:
+      - uid: ml-feature-drift
+        title: Feature drift above PSI 0.25
+        condition: C
+        data:
+          # One row per monitored feature, so each one fires on its own.
+          - refId: A
+            relativeTimeRange:
+              from: 3600
+              to: 0
+            datasourceUid: dsp-postgres
+            model:
+              refId: A
+              editorMode: code
+              format: table
+              rawQuery: true
+              rawSql: |-
+                SELECT f.feature, p.psi
+                FROM unnest(ARRAY['temp', 'hum', 'weathersit', 'prediction'])
+                  AS f(feature)
+                CROSS JOIN LATERAL feature_psi(
+                  f.feature, '1 hour', now() - interval '1 hour', now()
+                ) AS p
+                WHERE p.sample_size >= 30
+          - refId: C
+            relativeTimeRange:
+              from: 3600
+              to: 0
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: A
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0.25]
+        noDataState: OK
+        execErrState: Error
+        for: 2m
+        isPaused: false
+        labels:
+          team: ml
+          severity: warning
+        annotations:
+          __dashboardUid__: drift-predictions
+          __panelId__: "1"
+          summary: "Drift on {{ $labels.feature }}: PSI {{ printf \"%.2f\" $values.A.Value }} over the last hour"
+          description: >-
+            PSI above 0.25 against the champion's training data (course 5:
+            retrain). Check the Drift and Predictions dashboard at
+            http://localhost:3000/d/drift-predictions, then the latest
+            ingested files. The training DAG retrains when enough new
+            labelled rows exist.
+
+      - uid: ml-prediction-anomaly
+        title: Constant or unrealistic predictions
+        condition: C
+        data:
+          # 1 when the last 30 minutes (20 rows or more) look broken.
+          - refId: A
+            relativeTimeRange:
+              from: 1800
+              to: 0
+            datasourceUid: dsp-postgres
+            model:
+              refId: A
+              editorMode: code
+              format: table
+              rawQuery: true
+              rawSql: |-
+                SELECT CASE
+                  WHEN count(*) >= 20 AND (
+                       stddev_samp(p.prediction) < 1
+                    OR min(p.prediction) < 0
+                    OR max(p.prediction) > 1.5 * b.baseline_max)
+                  THEN 1 ELSE 0 END AS anomaly
+                FROM predictions AS p
+                CROSS JOIN v_baseline_numeric AS b
+                WHERE b.feature = 'cnt' AND b.is_champion
+                  AND p.created_at > now() - interval '30 minutes'
+                GROUP BY b.baseline_max
+          - refId: C
+            relativeTimeRange:
+              from: 1800
+              to: 0
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: A
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0]
+        noDataState: OK
+        execErrState: Error
+        for: 2m
+        isPaused: false
+        labels:
+          team: ml
+          severity: critical
+        annotations:
+          __dashboardUid__: drift-predictions
+          __panelId__: "5"
+          summary: Predictions are constant, negative or far above training demand
+          description: >-
+            Over the last 30 minutes the predictions have a standard
+            deviation below 1, a negative value, or a value above 1.5x the
+            highest cnt seen in training. Check which model_version served
+            them, then roll back @champion if a new model caused it.

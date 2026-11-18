@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "d1892031-1dc5-472a-871a-6289412b7220",
+      "name": "ingested_file"
+    },
+    "batch_definition": {
+      "id": "e2dbd8b4-9f28-4a63-9946-e68b93e6951e",
+      "name": "selected_file"
+    },
+    "datasource": {
+      "id": "de826494-4427-41ad-8096-03c0597efd9e",
+      "name": "bike_sharing_files"
+    }
+  },
+  "id": "db95d20a-a591-4178-b286-ce3bfb62a3e8",
+  "name": "bike_sharing_ingestion_validation",
+  "suite": {
+    "id": "e98f649d-d200-4c27-abe9-ee141c3c7ed8",
+    "name": "bike_sharing_ingestion_suite"
+  }
+}

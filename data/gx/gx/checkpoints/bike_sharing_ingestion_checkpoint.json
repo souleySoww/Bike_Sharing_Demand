@@ -1,0 +1,12 @@
+{
+  "actions": [],
+  "id": "b85901e0-cd77-4de0-b1b4-27414460cf56",
+  "name": "bike_sharing_ingestion_checkpoint",
+  "result_format": "SUMMARY",
+  "validation_definitions": [
+    {
+      "id": "db95d20a-a591-4178-b286-ce3bfb62a3e8",
+      "name": "bike_sharing_ingestion_validation"
+    }
+  ]
+}

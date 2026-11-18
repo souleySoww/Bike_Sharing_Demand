@@ -1,0 +1,54 @@
+{
+  "source": "newest 20% of hour.csv (fixed test set, never trained on)",
+  "instants": [
+    13921,
+    17378
+  ],
+  "rows_per_file": 50,
+  "shifts": {
+    "temp": "+0.25, clipped to [0, 1]",
+    "atemp": "+0.25, clipped to [0, 1]",
+    "hum": "-0.3, clipped to [0, 1]",
+    "weathersit": "3 for about 70% of rows"
+  },
+  "psi_against_baseline": {
+    "temp": {
+      "before_shift": 0.237,
+      "after_shift": 4.154
+    },
+    "hum": {
+      "before_shift": 0.109,
+      "after_shift": 4.001
+    },
+    "weathersit": {
+      "before_shift": 0.066,
+      "after_shift": 2.169
+    }
+  },
+  "files": {
+    "drift_0000.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 50,
+      "expected_bad_rows": 0,
+      "expected_alert": "ML Alerts: PSI above 0.25"
+    },
+    "drift_0001.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 50,
+      "expected_bad_rows": 0,
+      "expected_alert": "ML Alerts: PSI above 0.25"
+    },
+    "drift_0002.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 50,
+      "expected_bad_rows": 0,
+      "expected_alert": "ML Alerts: PSI above 0.25"
+    },
+    "drift_0003.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 50,
+      "expected_bad_rows": 0,
+      "expected_alert": "ML Alerts: PSI above 0.25"
+    }
+  }
+}

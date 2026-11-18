@@ -1,0 +1,403 @@
+{
+  "expectations": [
+    {
+      "id": "c6bdddc7-46a7-423d-b8d1-4426bcb01ed7",
+      "kwargs": {
+        "column": "instant"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "ac55d1e9-3010-4a4b-aaec-e69cb6dfa4e9",
+      "kwargs": {
+        "column": "instant"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "8814b5f2-d425-4851-96a2-9f12faae1de3",
+      "kwargs": {
+        "column": "dteday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "9bf0f32e-028f-43ba-8498-3815da84bcfb",
+      "kwargs": {
+        "column": "dteday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "eedc4ef8-f99c-4830-82b2-83b564e0d0c5",
+      "kwargs": {
+        "column": "season"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "fdf5d414-0aa2-48ca-94b9-2df956c0de1c",
+      "kwargs": {
+        "column": "season"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "7eb3a5b6-40cc-4678-b8c4-7e42bcd7fb88",
+      "kwargs": {
+        "column": "yr"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "79d44b30-04e4-46df-a625-638507a47d2d",
+      "kwargs": {
+        "column": "yr"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "56bc3b3b-fc80-4245-818e-192b3e5336d5",
+      "kwargs": {
+        "column": "mnth"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "a82a92c8-fc67-45dc-a929-f5ae5684b4cf",
+      "kwargs": {
+        "column": "mnth"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "3b91b86e-c0bc-49cc-8c38-3d408cfa1fc3",
+      "kwargs": {
+        "column": "hr"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "6e492067-4736-42e0-aaf7-10209beb2e50",
+      "kwargs": {
+        "column": "hr"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "10a9ab3f-f66b-47f7-9ffb-e58771096d19",
+      "kwargs": {
+        "column": "holiday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "65d3aa09-f921-4711-b2cf-73af23e56830",
+      "kwargs": {
+        "column": "holiday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "ec738ae3-9774-44c9-89ab-176d6221744c",
+      "kwargs": {
+        "column": "weekday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "fcf47950-ed40-44e7-8727-31522476020a",
+      "kwargs": {
+        "column": "weekday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "96419962-03ca-4b91-91b1-745892c851f9",
+      "kwargs": {
+        "column": "workingday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "3f40d0fc-df36-4c4b-8017-bfe0e50ea9ce",
+      "kwargs": {
+        "column": "workingday"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "d3d16fcb-d2f7-4153-8164-fb26582bc0dd",
+      "kwargs": {
+        "column": "weathersit"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "a330a85d-d886-404a-9d9d-f2dbdf40e407",
+      "kwargs": {
+        "column": "weathersit"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "1f64baf9-ff2d-43c4-ab9c-51c54da8405b",
+      "kwargs": {
+        "column": "temp"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "ed4b894f-8b4e-4dea-8ec8-af1b396aad8f",
+      "kwargs": {
+        "column": "temp"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "b1d63b98-8ccd-404b-824b-f70b328f1bf1",
+      "kwargs": {
+        "column": "atemp"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "2c5e33c7-8635-4437-8c93-f9676d5f87fa",
+      "kwargs": {
+        "column": "atemp"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "ed2bfe23-0f3c-42ef-89a1-51ff4f246e9e",
+      "kwargs": {
+        "column": "hum"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "1b56619b-c7e4-4bc2-88d8-a8bab573746d",
+      "kwargs": {
+        "column": "hum"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "176fd82e-294c-4184-ac15-27cba3715011",
+      "kwargs": {
+        "column": "windspeed"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_to_exist"
+    },
+    {
+      "id": "5fa21f98-de1d-45f2-8feb-40e5e2c54976",
+      "kwargs": {
+        "column": "windspeed"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "b51e701b-4d78-4bc1-b143-47772a722a67",
+      "kwargs": {
+        "column": "season",
+        "max_value": 4.0,
+        "min_value": 1.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "08e9a7a5-6ec7-4322-a1df-28d8d2149f03",
+      "kwargs": {
+        "column": "yr",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "f84fbc1b-51ea-4d48-abe3-f7bf69ae6f81",
+      "kwargs": {
+        "column": "mnth",
+        "max_value": 12.0,
+        "min_value": 1.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "a14976be-77b2-404d-8bb1-474580079c83",
+      "kwargs": {
+        "column": "hr",
+        "max_value": 23.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "e60fe5bb-d006-4876-83eb-f419e562eec5",
+      "kwargs": {
+        "column": "holiday",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "5b471bb1-682f-4c23-a0c9-bf66437bcbe6",
+      "kwargs": {
+        "column": "weekday",
+        "max_value": 6.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "084c6ca2-3330-4432-b7f9-37cb7a2eec78",
+      "kwargs": {
+        "column": "workingday",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "f0d1b648-0130-4c4a-85a7-be604aa95ffe",
+      "kwargs": {
+        "column": "weathersit",
+        "max_value": 4.0,
+        "min_value": 1.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "96357f38-9f53-41c2-afc2-1c396925cca8",
+      "kwargs": {
+        "column": "temp",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "dc8f8e17-cbcc-4c44-8da3-4ae3013e64cb",
+      "kwargs": {
+        "column": "atemp",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "1395676e-9835-4d48-ac1e-fb606f2d58ab",
+      "kwargs": {
+        "column": "hum",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "6b1846be-5fbc-4b6d-b7ff-a94a16e6c31a",
+      "kwargs": {
+        "column": "windspeed",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "4b2c502c-6366-4ae1-aadc-9ce5b4c5049a",
+      "kwargs": {
+        "column": "instant"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    }
+  ],
+  "id": "e98f649d-d200-4c27-abe9-ee141c3c7ed8",
+  "meta": {
+    "great_expectations_version": "1.8.1"
+  },
+  "name": "bike_sharing_ingestion_suite",
+  "notes": null
+}

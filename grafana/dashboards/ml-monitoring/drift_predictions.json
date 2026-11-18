@@ -1,0 +1,483 @@
+{
+  "id": null,
+  "uid": "drift-predictions",
+  "title": "Drift and Predictions",
+  "description": "For ML engineers: feature drift and prediction drift against the champion's training data (PSI, course 5).",
+  "tags": [
+    "bike-sharing",
+    "ml",
+    "drift"
+  ],
+  "timezone": "browser",
+  "editable": false,
+  "graphTooltip": 1,
+  "refresh": "30s",
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "schemaVersion": 41,
+  "version": 1,
+  "templating": {
+    "list": [
+      {
+        "name": "bucket",
+        "label": "Bucket",
+        "type": "custom",
+        "query": "15 minutes,30 minutes,1 hour",
+        "current": {
+          "text": "15 minutes",
+          "value": "15 minutes"
+        },
+        "options": [
+          {
+            "text": "15 minutes",
+            "value": "15 minutes",
+            "selected": true
+          },
+          {
+            "text": "30 minutes",
+            "value": "30 minutes",
+            "selected": false
+          },
+          {
+            "text": "1 hour",
+            "value": "1 hour",
+            "selected": false
+          }
+        ],
+        "multi": false,
+        "includeAll": false,
+        "hide": 0
+      }
+    ]
+  },
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Feature drift: PSI of temp",
+      "description": "Population Stability Index of temp per time bucket. PSI (course 5): below 0.1 no action, 0.1 to 0.25 monitor, above 0.25 retrain. Buckets with fewer than 30 rows are hidden because PSI is noise on small samples. Compared with the current champion's training data.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "dsp-postgres"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "showPoints": "always",
+            "spanNulls": false,
+            "fillOpacity": 10,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 0.1
+              },
+              {
+                "color": "red",
+                "value": 0.25
+              }
+            ]
+          },
+          "decimals": 3
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT bucket_start AS time, psi AS \"PSI temp\"\nFROM feature_psi('temp', '$bucket', $__timeFrom(), $__timeTo())\nWHERE sample_size >= 30\nORDER BY 1"
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT bucket_start AS time, psi AS \"PSI atemp\"\nFROM feature_psi('atemp', '$bucket', $__timeFrom(), $__timeTo())\nWHERE sample_size >= 30\nORDER BY 1"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Feature drift: PSI of weathersit and hum",
+      "description": "PSI of the weather category and humidity per time bucket. PSI (course 5): below 0.1 no action, 0.1 to 0.25 monitor, above 0.25 retrain. Buckets with fewer than 30 rows are hidden because PSI is noise on small samples. Compared with the current champion's training data.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "dsp-postgres"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "showPoints": "always",
+            "spanNulls": false,
+            "fillOpacity": 10,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 0.1
+              },
+              {
+                "color": "red",
+                "value": 0.25
+              }
+            ]
+          },
+          "decimals": 3
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT bucket_start AS time, psi AS \"PSI weathersit\"\nFROM feature_psi('weathersit', '$bucket', $__timeFrom(), $__timeTo())\nWHERE sample_size >= 30\nORDER BY 1"
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT bucket_start AS time, psi AS \"PSI hum\"\nFROM feature_psi('hum', '$bucket', $__timeFrom(), $__timeTo())\nWHERE sample_size >= 30\nORDER BY 1"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Mean prediction vs training demand, per model version",
+      "description": "Average predicted rentals per bucket, one line per model_version, against the mean cnt of the champion's training data. A new line means the champion changed. A gap that grows means prediction drift. Orange and red mark predictions above 1.5x and 2x the 60% baseline training mean (145 rentals).",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "dsp-postgres"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "showPoints": "always",
+            "spanNulls": false,
+            "fillOpacity": 10,
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 220
+              },
+              {
+                "color": "red",
+                "value": 290
+              }
+            ]
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date_bin('$bucket'::interval, created_at, $__timeFrom()::timestamptz) AS time,\n  COALESCE(model_version, 'unknown') AS metric,\n  avg(prediction) AS value\nFROM predictions\nWHERE $__timeFilter(created_at)\nGROUP BY 1, 2\nORDER BY 1"
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT $__timeFrom()::timestamptz AS time,\n       baseline_mean AS \"training cnt mean\"\nFROM v_baseline_numeric WHERE feature = 'cnt' AND is_champion\nUNION ALL\nSELECT $__timeTo()::timestamptz, baseline_mean\nFROM v_baseline_numeric WHERE feature = 'cnt' AND is_champion\nORDER BY 1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Prediction drift: PSI of predictions vs training cnt",
+      "description": "Compares the distribution of predictions P(Y hat) with the distribution of the target cnt in the champion's training data. PSI (course 5): below 0.1 no action, 0.1 to 0.25 monitor, above 0.25 retrain. Buckets with fewer than 30 rows are hidden because PSI is noise on small samples. Compared with the current champion's training data.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "dsp-postgres"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "showPoints": "always",
+            "spanNulls": false,
+            "fillOpacity": 10,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 0.1
+              },
+              {
+                "color": "red",
+                "value": 0.25
+              }
+            ]
+          },
+          "decimals": 3
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT bucket_start AS time, psi AS \"PSI prediction\"\nFROM feature_psi('prediction', '$bucket', $__timeFrom(), $__timeTo())\nWHERE sample_size >= 30\nORDER BY 1"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Prediction spread: standard deviation per bucket",
+      "description": "Standard deviation of predictions per bucket (10 rows or more). Near 0 means the model outputs a constant: check the champion and the input features. The baseline training cnt std is about 135.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "dsp-postgres"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "showPoints": "always",
+            "spanNulls": false,
+            "fillOpacity": 10,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "green",
+                "value": 10
+              }
+            ]
+          },
+          "decimals": 1
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "dsp-postgres"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date_bin('$bucket'::interval, created_at, $__timeFrom()::timestamptz) AS time,\n  stddev_samp(prediction) AS \"prediction std\"\nFROM predictions\nWHERE $__timeFilter(created_at)\nGROUP BY 1\nHAVING count(*) >= 10\nORDER BY 1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "source": "oldest 60% of hour.csv (already learned by v1)",
+  "rows_per_file": 10,
+  "training_triggered": false,
+  "expected_drift": "PSI below 0.1",
+  "files": {
+    "traffic_0000.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0001.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0002.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0003.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0004.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0005.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0006.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0007.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0008.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0009.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0010.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0011.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0012.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0013.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0014.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0015.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0016.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0017.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0018.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0019.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0020.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0021.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0022.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0023.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0024.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0025.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0026.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0027.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0028.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    },
+    "traffic_0029.csv": {
+      "expected_criticality": "none",
+      "expected_good_rows": 10,
+      "expected_bad_rows": 0,
+      "expected_alert": false
+    }
+  }
+}
